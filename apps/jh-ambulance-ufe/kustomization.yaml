@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources: # zoznam manifestov - objektov,
+  # ktoré sú súčasťou tejto aplikácie
+  - deployment.yaml
+  - service.yaml
+  - webcomponent.yaml
+
+commonLabels: # značky priradené všetkým objektom tejt aplikácie
+  app.kubernetes.io/component: jh-ambulance-ufe
