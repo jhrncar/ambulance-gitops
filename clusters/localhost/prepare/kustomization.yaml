@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - namespace.yaml # namespace je tiež objektom pre tento klaster
   - ../../../infrastructure/ufe-controller # kustomization pre ufe-controller
+  - ../../../infrastructure/fluxcd
 
 patches:
   - path: patches/ufe-controller.service.yaml # úprava služby ufe-controller
