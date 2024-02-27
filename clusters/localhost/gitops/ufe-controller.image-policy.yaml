@@ -1,0 +1,11 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: ufe-controller
+  namespace: wac-hospital
+spec:
+  imageRepositoryRef:
+    name: ufe-controller # referuje ImageRepository z predchádzajúceho kroku
+  policy:
+    semver:
+      range: "^1.*.*"

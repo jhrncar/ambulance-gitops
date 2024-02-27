@@ -10,3 +10,5 @@ commonLabels:
 
 resources:
   - ../../../apps/jh-ambulance-ufe
+components:
+  - ../../../components/version-developers
