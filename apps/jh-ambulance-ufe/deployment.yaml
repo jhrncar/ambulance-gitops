@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: jh-ambulance-ufe-deployment # meno deployment-u od ktorého sa odvádza meno podu
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       pod:
