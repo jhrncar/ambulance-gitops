@@ -8,5 +8,16 @@ resources:
 
 patches:
   - path: patches/ufe-controller.service.yaml # úprava služby ufe-controller
+  - patch: |-
+      - op: add
+        path: "/spec/template/spec/containers/0/env/-"
+        value:
+          name: "HTTP_CSP_HEADER"
+          value: "default-src 'self' 'unsafe-inline' https://fonts.googleapis.com/ https://fonts.gstatic.com/; font-src 'self' https://fonts.googleapis.com/ https://fonts.gstatic.com/; script-src 'nonce-{NONCE_VALUE}'; connect-src 'self' localhost:30331 localhost:30081"
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: ufe-controller
 components:
   - ../../../components/version-developers
