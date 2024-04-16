@@ -11,6 +11,7 @@ commonLabels:
 resources:
   - ../../../apps/jh-ambulance-ufe
   - ../../../apps/jh-ambulance-webapi
+  - ../../../apps/mongo-express
 components:
   - ../../../components/version-developers
   - https://github.com/jhrncar/ambulance-webapi//deployments/kustomize/components/mongodb
