@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ufe-controller
+spec:
+  template:
+    spec:
+      containers:
+        - name: ufe-controller
+          env:
+            - name: BASE_URL
+              value: /ui/

@@ -1,0 +1,50 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: jh-ambulance-webapi
+spec:
+  parentRefs:
+    - name: wac-hospital-gateway
+      namespace: wac-hospital
+    - name: wac-hospital-gateway # Hack to make it work for common cluster
+      namespace: wac-hospital-system
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /jh-api
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /api
+      backendRefs:
+        - group: ""
+          kind: Service
+          name: jh-ambulance-webapi
+          port: 80
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /jh-openapi-ui
+      backendRefs:
+        - group: ""
+          kind: Service
+          name: jh-openapi-ui
+          port: 80
+    - matches:
+        - path:
+            type: Exact
+            value: /jh-openapi
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplaceFullPath
+              replaceFullPath: /openapi
+      backendRefs:
+        - group: ""
+          kind: Service
+          name: jh-ambulance-webapi
+          port: 80
