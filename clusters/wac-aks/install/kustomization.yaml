@@ -9,6 +9,7 @@ commonLabels:
 
 resources:
   - ../../../apps/jh-ambulance-ufe
+  - ../../../apps/jh-ambulance-webapi
 
 components:
   - ../../../components/version-release
