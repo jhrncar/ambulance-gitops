@@ -1,0 +1,18 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt-issuer
+  namespace: default
+spec:
+  acme:
+    email: xhrncar@stuba.sk
+    server: https://acme-staging-v02.api.letsencrypt.org/directory # Use this for testing
+    privateKeySecretRef:
+      name: letsencrypt-issuer-account-key
+    solvers:
+      - http01:
+          gatewayHTTPRoute:
+            parentRefs:
+              - name: wac-hospital-gateway
+                namespace: wac-hospital
+                kind: Gateway

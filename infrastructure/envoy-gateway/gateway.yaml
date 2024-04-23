@@ -3,9 +3,36 @@ kind: Gateway
 metadata:
   name: wac-hospital-gateway
   namespace: wac-hospital
+  annotations:
+    cert-manager.io/issuer: development-issuer # patch this to letsencrypt-issuer for production cluster
+    cert-manager.io/email-sans: "pfx@gmail.com"
+    cert-manager.io/subject-organizations: "WAC-Hospital"
+    cert-manager.io/subject-organizationalunits: "IT Support"
+    cert-manager.io/subject-countries: "SK"
+    cert-manager.io/subject-localities: "Bratislava"
+    cert-manager.io/revision-history-limit: "3"
+    cert-manager.io/private-key-rotation-policy: Always
 spec:
   gatewayClassName: wac-hospital-gateway-class
   listeners:
     - name: http
       protocol: HTTP
       port: 80
+    - hostname: wac-hospital.loc
+      name: fqdn
+      protocol: HTTPS
+      port: 443
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            name: wac-hospital-tls
+    - hostname: localhost
+      name: https-localhost
+      protocol: HTTPS
+      port: 443
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            name: wac-hospital-tls
